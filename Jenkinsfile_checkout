@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+       
+  stages {
+        stage('CHECKOUT1') {
+            steps {
+                checkout([$class: 'GitSCM',
+                            branches: [[name: 'main']],
+                            userRemoteConfigs: [[url: 'https://github.com/santosh937/devops-demo1.git',
+                                                credentialsId: 'github_id']]])
+            }
+        }
+
+        stage('CHECK CHECKOUT1') {
+            steps {
+                sh '''
+                    pwd
+                    git branch 
+                    ls -lrt
+                '''
+            }
+        }
+
+        stage('CHECK CHECKOUT2') {
+            steps {
+                sh '''
+                    pwd
+                    git branch 
+                    ls -lrt
+                '''
+            }
+        }
+
+        stage('CHECKOUT2') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'github_id',
+                    url: 'https://github.com/santosh937/getting-started.git'
+            }
+        }
+
+        stage('CHECK CHECKOUT docker') {
+            steps {
+                sh '''
+                    pwd
+                    git branch 
+                    ls -lrt
+                '''
+            }
+        }
+    }
+}
